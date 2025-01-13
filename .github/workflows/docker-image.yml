@@ -16,8 +16,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-
- - name: Get Docker image size
+    - name: Get Docker image size
       id: image_size
       run: |
         IMAGE_SIZE=$(docker image inspect ${{ secrets.ACR_LOGIN_SERVER }}/my-app:latest --format='{{.Size}}')
