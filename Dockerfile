@@ -1,14 +1,16 @@
-FROM ubuntu
-MAINTAINER Kimbro Staken
+# Dockerfile
 
-RUN apt-get install -y software-properties-common python
-RUN add-apt-repository ppa:chris-lea/node.js
-RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ precise universe" >> /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get install -y nodejs
-#RUN apt-get install -y nodejs=0.6.12~dfsg1-1ubuntu1
-RUN mkdir /var/www
+# Use a lightweight Node.js base image
+FROM node:alpine
 
-ADD app.js /var/www/app.js
+# Set working directory
+WORKDIR /app
 
-CMD ["/usr/bin/node", "/var/www/app.js"] 
+# Copy application files
+COPY app.js .
+
+# Expose the application's port
+EXPOSE 3000
+
+# Start the application
+CMD ["node", "app.js"]
