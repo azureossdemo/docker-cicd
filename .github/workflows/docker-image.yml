@@ -17,7 +17,7 @@ jobs:
     - name: Build the Docker image
       id: build_image
       run: |
-        IMAGE_NAME="${{ secrets.ACR_LOGIN_SERVER }}/my-app:latest"
+        IMAGE_NAME="test:v1"
         docker build -t $IMAGE_NAME .
         IMAGE_SIZE=$(docker image inspect $IMAGE_NAME --format='{{.Size}}')
         IMAGE_SIZE_MB=$(echo "$IMAGE_SIZE / 1048576" | bc)
