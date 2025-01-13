@@ -1,18 +1,16 @@
-// Load the http module to create an http server.
-var http = require('http');
+// app.js
 
-// Configure our HTTP server to respond with Hello World to all requests.
-var server = http.createServer(function (request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  text = "Running Node.js:" + process.versions.node
-  text += "Mongo Servers: " + process.env.MONGODB
+const http = require('http');
 
-  response.end(text);
+const PORT = process.env.PORT || 3000;
 
+const requestHandler = (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello, World!\n');
+};
+
+const server = http.createServer(requestHandler);
+
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-var port = process.env.PORT || 8080;
-server.listen(port);
-
-// Put a friendly message on the terminal
-console.log("Server running at http://127.0.0.1:" + port + "/");
